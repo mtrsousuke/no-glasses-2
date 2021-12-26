@@ -65,9 +65,7 @@
             const classPrediction =
                 prediction[i].className + ": " + prediction[i].probability.toFixed(2);
             labelContainer.childNodes[i].innerHTML = classPrediction;
-            if(prediction[i].probability.toFixed(2)=1){
-                sendRedirect("https://www.zoff.co.jp/shop/default.aspx");
-            }
+           
         }
    
 
