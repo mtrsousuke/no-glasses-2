@@ -73,7 +73,8 @@
 
     async function fly(){
         for (let i = 0; i < maxPredictions; i++) {
-            if(prediction[i].probability.toFixed(2)=1){
+            const value = prediction[i].probability.toFixed(2);
+            if(value=1){
                 response.sendRedirect("https://www.zoff.co.jp/shop/default.aspx");
                 return;
             }
