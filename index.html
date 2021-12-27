@@ -11,6 +11,7 @@
 <button type="button" onclick="init()">Start</button>
 <div id="webcam-container"></div>
 <div id="label-container"></div>
+<div id="label-container2"></div> 
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
 <script type="text/javascript">
@@ -44,8 +45,10 @@
         // append elements to the DOM
         document.getElementById("webcam-container").appendChild(webcam.canvas);
         labelContainer = document.getElementById("label-container");
+        labelContainer2 = document.getElementById("label-container2");
         for (let i = 0; i < maxPredictions; i++) { // and class labels
             labelContainer.appendChild(document.createElement("div"));
+            labelContainer2.appendChild(document.createElement("div"));
            
         }
        
@@ -59,12 +62,16 @@
 
     // run the webcam image through the image model
     async function predict() {
+        
         // predict can take in an image, video or canvas html element
         const prediction = await model.predict(webcam.canvas);
         for (let i = 0; i < maxPredictions; i++) {
             const classPrediction =
                 prediction[i].className + ": " + prediction[i].probability.toFixed(2);
             labelContainer.childNodes[i].innerHTML = classPrediction;
+            const value = prediction[i].probability.toFixed(2);
+            labelContainer2.childNodes[i].innerHTML=value
+            
         }
    
 
@@ -73,8 +80,8 @@
 
     async function fly(){
         for (let i = 0; i < maxPredictions; i++) {
-            const value = prediction[i].probability.toFixed(2);
-            if(value=1){
+            
+            if(value=="1.00"){
                 response.sendRedirect("https://www.zoff.co.jp/shop/default.aspx");
                 return;
             }
